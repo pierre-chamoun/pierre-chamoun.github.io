@@ -1,4 +1,4 @@
-baseURL = 'https://pierre-chamoun.github.io'
+baseURL = 'https://pierre-chamoun.github.io/'
 locale = 'en-us'
 title = 'Pierre Chamoun'
 theme = 'portfolio'
