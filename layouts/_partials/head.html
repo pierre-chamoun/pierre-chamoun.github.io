@@ -16,6 +16,15 @@
 {{ $css := resources.Get "css/main.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
 
+{{ with site.Params.accentColor }}
+<style>
+  :root {
+    --accent:      {{ . }};
+    --accent-dark: color-mix(in lab, {{ . }} 75%, black);
+  }
+</style>
+{{ end }}
+
 {{ if or .Params.math site.Params.math }}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js" crossorigin="anonymous"></script>

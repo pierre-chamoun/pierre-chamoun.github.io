@@ -77,7 +77,7 @@
       {{ if .Params.tags }}
       <div class="post-card-tags">
         {{ range .Params.tags }}
-        <span class="post-tag">{{ . | title }}</span>
+        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="post-tag">{{ . | title }}</a>
         {{ end }}
       </div>
       {{ end }}

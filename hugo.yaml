@@ -7,14 +7,15 @@ params:
   shortname:   PC
   tagline:     MSc Robotics Student
   institution: McGill University
-  email:       pierre.chamoun@outlook.com
+  email:       pierre.chamoun@mail.mcgill.ca
   github:      'youtube.com'
-  scholar:     'youtube.com'
   linkedin:    'youtube.com'
-  twitter:     'lol'
+  scholar:     'youtube.com'
+  twitter:     ''
   cv:          'lol.pdf'
   description: Academic portfolio of Pierre Chamoun, MSc Robotics student.
-  # avatar: /img/avatar.jpg   # add your photo to static/img/ and uncomment
+  accentColor: '#00838a'
+  avatar: /img/pic.jpg   # add your photo to static/img/ and uncomment
 
 menus:
   main:

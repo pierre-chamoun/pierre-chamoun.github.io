@@ -51,11 +51,11 @@ ul, ol { list-style: none; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 54px;
+  height: 64px;
 }
 .site-title {
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: 1.15rem;
+  font-weight: 600;
   color: var(--text);
   letter-spacing: -0.01em;
 }
@@ -282,10 +282,8 @@ ul, ol { list-style: none; }
 
 .pub-type-badge {
   display: inline-block;
-  font-size: 0.6rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
+  font-size: 0.7rem;
+  font-weight: 600;
   padding: 0.28rem 0.6rem;
   border-radius: 4px;
   white-space: nowrap;
@@ -516,8 +514,9 @@ ul, ol { list-style: none; }
   padding: 0.2rem 0.65rem;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 5px;
   color: var(--muted);
+  transition: border-color 0.15s, color 0.15s;
 }
 .post-tag:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
 
@@ -752,7 +751,7 @@ ul, ol { list-style: none; }
   padding: 0.22rem 0.38rem 0.22rem 0.65rem;
   background: var(--accent);
   color: #fff;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 .chip-remove {
   display: flex;
