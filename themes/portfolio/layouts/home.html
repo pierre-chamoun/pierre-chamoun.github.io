@@ -1,0 +1,87 @@
+{{ define "main" }}
+<div class="container">
+
+  {{/* ── Hero ── */}}
+  <section class="hero">
+    <div class="hero-inner">
+      {{ with site.Params.avatar }}
+      <img class="hero-avatar" src="{{ . }}" alt="{{ site.Params.name }}">
+      {{ else }}
+      <div class="hero-avatar-placeholder">&#x1F464;</div>
+      {{ end }}
+      <div class="hero-text">
+        <h1 class="hero-name">{{ site.Params.name }}</h1>
+        <p class="hero-subtitle">
+          {{ site.Params.tagline }}
+          {{- with site.Params.institution }} · {{ . }}{{ end }}
+        </p>
+        <div class="hero-bio">{{ .Content }}</div>
+        <div class="hero-links">
+          {{ with site.Params.email }}
+          <a href="mailto:{{ . }}" class="hero-link">✉ Email</a>
+          {{ end }}
+          {{ with site.Params.github }}
+          <a href="{{ . }}" class="hero-link" target="_blank" rel="noopener">⌥ GitHub</a>
+          {{ end }}
+          {{ with site.Params.scholar }}
+          <a href="{{ . }}" class="hero-link" target="_blank" rel="noopener">◎ Scholar</a>
+          {{ end }}
+          {{ with site.Params.cv }}
+          <a href="{{ . }}" class="hero-link" target="_blank" rel="noopener">↓ CV</a>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{/* ── Recent publications + News ── */}}
+  <div class="home-grid">
+
+    {{/* Publications column */}}
+    {{ $pubSection := site.GetPage "publications" }}
+    {{ if and $pubSection $pubSection.Pages }}
+    <div>
+      <h2 class="home-section-heading">Recent Publications</h2>
+      {{ $pubs := ($pubSection.Pages.ByParam "year").Reverse }}
+      {{ range first 4 $pubs }}
+      {{ $pub := . }}
+      <div class="home-pub-item">
+        <div class="home-pub-title">
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </div>
+        <div class="home-pub-meta">
+          {{ with .Params.authors }}{{ delimit . ", " }}{{ end }}
+          {{ with .Params.venue }}
+          · <span>{{ . }}{{ with $pub.Params.year }} {{ . }}{{ end }}</span>
+          {{ end }}
+        </div>
+        <div class="badge-links">
+          {{ with .Params.pdf }}<a href="{{ . }}" class="badge" target="_blank" rel="noopener">PDF</a>{{ end }}
+          {{ with .Params.arxiv }}<a href="{{ . }}" class="badge" target="_blank" rel="noopener">arXiv</a>{{ end }}
+          {{ with .Params.code }}<a href="{{ . }}" class="badge" target="_blank" rel="noopener">Code</a>{{ end }}
+        </div>
+      </div>
+      {{ end }}
+      <a href="{{ $pubSection.RelPermalink }}" class="home-see-all">All publications →</a>
+    </div>
+    {{ end }}
+
+    {{/* News column */}}
+    {{ $newsSection := site.GetPage "news" }}
+    {{ if and $newsSection $newsSection.Pages }}
+    <div>
+      <h2 class="home-section-heading">News</h2>
+      {{ range first 7 $newsSection.Pages }}
+      <div class="home-news-item">
+        <span class="home-news-date">{{ .Date | time.Format "Jan 2006" }}</span>
+        <span class="home-news-text">{{ .Title }}</span>
+      </div>
+      {{ end }}
+      <a href="{{ $newsSection.RelPermalink }}" class="home-see-all">All news →</a>
+    </div>
+    {{ end }}
+
+  </div>
+
+</div>
+{{ end }}

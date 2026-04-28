@@ -1,0 +1,50 @@
+<div class="container">
+  <a href="{{ site.Home.RelPermalink }}" class="site-title">{{ site.Params.name | default site.Title }}</a>
+
+  <button class="burger" id="burger-btn" aria-label="Toggle navigation" aria-expanded="false">
+    <svg class="burger-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="3" y1="6"  x2="21" y2="6"/>
+      <line x1="3" y1="12" x2="21" y2="12"/>
+      <line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+    <svg class="burger-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none">
+      <line x1="18" y1="6"  x2="6"  y2="18"/>
+      <line x1="6"  y1="6"  x2="18" y2="18"/>
+    </svg>
+  </button>
+
+  <nav class="site-nav-wrap" id="site-nav-wrap">
+    <ul class="site-nav">
+      {{ range site.Menus.main }}
+      <li>
+        <a href="{{ .URL }}"{{ if eq $.RelPermalink .URL }} class="active"{{ end }}>{{ .Name }}</a>
+      </li>
+      {{ end }}
+    </ul>
+  </nav>
+</div>
+
+<script>
+(function () {
+  var btn  = document.getElementById('burger-btn');
+  var wrap = document.getElementById('site-nav-wrap');
+  var iconOpen  = btn.querySelector('.burger-open');
+  var iconClose = btn.querySelector('.burger-close');
+
+  btn.addEventListener('click', function () {
+    var open = wrap.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(open));
+    iconOpen.style.display  = open ? 'none'  : 'block';
+    iconClose.style.display = open ? 'block' : 'none';
+  });
+
+  wrap.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      wrap.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      iconOpen.style.display  = 'block';
+      iconClose.style.display = 'none';
+    });
+  });
+}());
+</script>

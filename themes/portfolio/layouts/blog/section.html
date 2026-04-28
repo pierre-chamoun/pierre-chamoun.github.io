@@ -1,0 +1,216 @@
+{{ define "main" }}
+<div class="container">
+
+  <div class="section-header">
+    <h1 class="section-title">{{ .Title }}</h1>
+    {{ with .Params.description }}<p class="section-desc">{{ . }}</p>{{ end }}
+  </div>
+
+  {{/* Collect unique tags — capitalise first letter for display */}}
+  {{ $allTags := slice }}
+  {{ range .Pages }}
+    {{ range .Params.tags }}
+      {{ $allTags = $allTags | append . }}
+    {{ end }}
+  {{ end }}
+  {{ $allTags = $allTags | uniq | sort }}
+
+  <div class="blog-header">
+
+    {{/* Row 1: search + topic dropdown */}}
+    <div class="blog-controls">
+      <div class="blog-search-wrap">
+        <svg class="blog-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input type="search" id="blog-search" class="blog-search" placeholder="Search articles…" autocomplete="off">
+      </div>
+
+      {{ if $allTags }}
+      <div class="topic-dropdown" id="topic-dropdown">
+        <button class="topic-btn" id="topic-btn" type="button">
+          <span class="topic-label">Filter by topic</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="topic-menu" id="topic-menu">
+          {{ range $allTags }}
+          {{ $slug  := . | urlize }}
+          {{ $label := . | title }}
+          <button class="topic-option" data-tag="{{ $slug }}" data-label="{{ $label }}" type="button">{{ $label }}</button>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+
+    {{/* Row 2: active chips + clear all (hidden until a topic is selected) */}}
+    <div class="blog-active-filters" id="blog-active-filters">
+      <div class="filter-chips" id="filter-chips"></div>
+      <button class="clear-all-btn" id="clear-all-btn" type="button">Clear all</button>
+    </div>
+
+    <p class="filter-count" id="filter-count" style="display:none"></p>
+
+  </div>
+
+  <div class="post-list" id="post-list">
+    {{ range .Pages }}
+    {{ $tagSlugs := slice }}
+    {{ range .Params.tags }}{{ $tagSlugs = $tagSlugs | append (. | urlize) }}{{ end }}
+    <article class="post-card"
+      data-title="{{ .Title | lower }}"
+      data-tags="{{ delimit $tagSlugs " " }}"
+      data-summary="{{ .Summary | plainify | lower }}">
+      <div class="post-card-meta">
+        <time datetime="{{ .Date | time.Format "2006-01-02" }}">{{ .Date | time.Format "Jan 2, 2006" }}</time>
+        <span class="post-card-meta-sep">·</span>
+        <span>{{ .ReadingTime }} min read</span>
+      </div>
+      <h2 class="post-card-title">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </h2>
+      {{ with .Summary }}
+      <p class="post-card-summary">{{ . }}</p>
+      {{ end }}
+      {{ if .Params.tags }}
+      <div class="post-card-tags">
+        {{ range .Params.tags }}
+        <span class="post-tag">{{ . | title }}</span>
+        {{ end }}
+      </div>
+      {{ end }}
+    </article>
+    {{ end }}
+  </div>
+
+  <p class="no-results" id="no-results" style="display:none;">No articles match your search.</p>
+
+</div>
+
+<script>
+(function () {
+  var search      = document.getElementById('blog-search');
+  var cards       = document.querySelectorAll('#post-list .post-card');
+  var noRes       = document.getElementById('no-results');
+  var defaultLabel = 'Filter by topic';
+  var topicBtn    = document.getElementById('topic-btn');
+  var topicMenu   = document.getElementById('topic-menu');
+  var options     = topicMenu ? topicMenu.querySelectorAll('.topic-option') : [];
+  var filtersRow  = document.getElementById('blog-active-filters');
+  var chipsEl     = document.getElementById('filter-chips');
+  var clearBtn    = document.getElementById('clear-all-btn');
+
+  /* slug → display label */
+  var activeTags  = new Map();
+  var total       = cards.length;
+  var countEl     = document.getElementById('filter-count');
+
+  /* ── filter posts ── */
+  function run() {
+    var q = search ? search.value.toLowerCase().trim() : '';
+    var visible = 0;
+    cards.forEach(function (card) {
+      var title = card.dataset.title || '';
+      var tags  = ' ' + (card.dataset.tags || '') + ' ';
+      var summ  = card.dataset.summary || '';
+      var tagOk = true;
+      activeTags.forEach(function (lbl, slug) {
+        if (tags.indexOf(' ' + slug + ' ') === -1) tagOk = false;
+      });
+      var srOk = !q || title.indexOf(q) !== -1 || summ.indexOf(q) !== -1 || tags.indexOf(q) !== -1;
+      card.style.display = (tagOk && srOk) ? '' : 'none';
+      if (tagOk && srOk) visible++;
+    });
+    if (noRes) noRes.style.display = visible === 0 ? '' : 'none';
+    /* count line */
+    if (countEl) {
+      var isFiltered = activeTags.size > 0 || q !== '';
+      if (isFiltered) {
+        countEl.style.display = '';
+        countEl.textContent = 'Showing ' + visible + ' of ' + total + ' article' + (total === 1 ? '' : 's');
+      } else {
+        countEl.style.display = 'none';
+      }
+    }
+  }
+
+  /* ── rebuild chip row ── */
+  function updateChips() {
+    if (!chipsEl || !filtersRow) return;
+    chipsEl.innerHTML = '';
+    activeTags.forEach(function (label, slug) {
+      var chip = document.createElement('span');
+      chip.className = 'filter-chip';
+      chip.appendChild(document.createTextNode(label));
+      var x = document.createElement('button');
+      x.className = 'chip-remove';
+      x.type = 'button';
+      x.setAttribute('aria-label', 'Remove ' + label);
+      x.textContent = '×';
+      x.addEventListener('click', function () {
+        activeTags.delete(slug);
+        syncOptions();
+        updateChips();
+        run();
+      });
+      chip.appendChild(x);
+      chipsEl.appendChild(chip);
+    });
+    filtersRow.classList.toggle('visible', activeTags.size > 0);
+  }
+
+  /* ── sync checkmarks in dropdown ── */
+  function syncOptions() {
+    options.forEach(function (opt) {
+      opt.classList.toggle('selected', activeTags.has(opt.dataset.tag));
+    });
+  }
+
+  /* ── search input ── */
+  if (search) search.addEventListener('input', run);
+
+  /* ── dropdown ── */
+  if (topicBtn && topicMenu) {
+    topicBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = topicMenu.classList.toggle('open');
+      topicBtn.classList.toggle('open', open);
+    });
+    /* keep open when clicking inside the menu */
+    topicMenu.addEventListener('click', function (e) { e.stopPropagation(); });
+    document.addEventListener('click', function () {
+      topicMenu.classList.remove('open');
+      topicBtn.classList.remove('open');
+    });
+
+    options.forEach(function (opt) {
+      opt.addEventListener('click', function () {
+        var slug  = this.dataset.tag;
+        var label = this.dataset.label;
+        if (activeTags.has(slug)) {
+          activeTags.delete(slug);
+        } else {
+          activeTags.set(slug, label);
+        }
+        syncOptions();
+        updateChips();
+        run();
+        /* keep dropdown open for multi-select */
+      });
+    });
+  }
+
+  /* ── clear all ── */
+  if (clearBtn) {
+    clearBtn.addEventListener('click', function () {
+      activeTags.clear();
+      syncOptions();
+      updateChips();
+      run();
+    });
+  }
+}());
+</script>
+{{ end }}

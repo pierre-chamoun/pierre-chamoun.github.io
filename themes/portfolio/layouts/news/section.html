@@ -1,0 +1,47 @@
+{{ define "main" }}
+<div class="container">
+
+  <div class="section-header">
+    <h1 class="section-title">{{ .Title }}</h1>
+    {{ with .Params.description }}<p class="section-desc">{{ . }}</p>{{ end }}
+  </div>
+
+  <div class="news-timeline">
+    {{ range .Pages }}
+    {{ $color := .Params.category_color | default "#9a9da2" }}
+    <div class="news-timeline-item" style="--dot-color:{{ $color }}">
+
+      {{/* Left: date */}}
+      <div class="news-date-col">
+        <span>{{ .Date | time.Format "Jan" }}</span>
+        <span>{{ .Date | time.Format "2006" }}</span>
+      </div>
+
+      {{/* Centre: dot + connecting line */}}
+      <div class="news-node-col">
+        <div class="news-dot"></div>
+        <div class="news-connector"></div>
+      </div>
+
+      {{/* Right: category badge → title → body */}}
+      <div class="news-content-col">
+        {{ with .Params.category }}
+        <div class="news-timeline-badge">
+          <span class="pub-type-badge"
+            style="color:{{ $color }};background:color-mix(in srgb,{{ $color }} 12%,white);">
+            {{ . }}
+          </span>
+        </div>
+        {{ end }}
+        <div class="news-timeline-title">{{ .Title }}</div>
+        {{ with .Content }}
+        <div class="news-timeline-body prose">{{ . }}</div>
+        {{ end }}
+      </div>
+
+    </div>
+    {{ end }}
+  </div>
+
+</div>
+{{ end }}

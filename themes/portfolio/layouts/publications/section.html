@@ -1,0 +1,82 @@
+{{ define "main" }}
+
+{{ $iconArxiv := `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>` }}
+{{ $iconCode  := `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>` }}
+{{ $iconPdf   := `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>` }}
+{{ $iconSlide := `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>` }}
+{{ $iconVideo := `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>` }}
+
+<div class="container">
+
+  <div class="section-header">
+    <h1 class="section-title">{{ .Title }}</h1>
+    {{ with .Params.description }}<p class="section-desc">{{ . }}</p>{{ end }}
+  </div>
+
+  <div class="pub-list">
+    {{ $pages := (.Pages.ByParam "year").Reverse }}
+    {{ $years := slice }}
+    {{ range $pages }}
+      {{ if not (in $years .Params.year) }}
+        {{ $years = $years | append .Params.year }}
+      {{ end }}
+    {{ end }}
+
+    {{ range $years }}
+    {{ $y := . }}
+    <div class="pub-year-group">
+      <div class="pub-year-label">{{ $y }}</div>
+
+      {{ range where $pages "Params.year" $y }}
+      {{ $pub := . }}
+      {{ $color := .Params.pub_color | default "#6b7280" }}
+      <div class="pub-card">
+
+        {{/* Left — type badge with user-defined colour */}}
+        <div class="pub-badge-col">
+          {{ with $pub.Params.pub_type }}
+          <span class="pub-type-badge"
+            style="color:{{ $color }};background:color-mix(in srgb,{{ $color }} 12%,white);">
+            {{ . }}
+          </span>
+          {{ end }}
+        </div>
+
+        {{/* Right — content */}}
+        <div>
+          <div class="pub-card-title">
+            <a href="{{ $pub.RelPermalink }}">{{ $pub.Title }}</a>
+          </div>
+          <div class="pub-card-authors">
+            {{ with $pub.Params.authors }}{{ delimit . ", " }}{{ end }}
+          </div>
+          <div class="pub-card-venue">
+            {{ $pub.Params.venue }}{{ with $pub.Params.year }} · {{ . }}{{ end }}
+          </div>
+          <div class="pub-card-links">
+            {{ with $pub.Params.pdf }}
+            <a href="{{ . }}" class="badge" target="_blank" rel="noopener">{{ $iconPdf | safeHTML }} PDF</a>
+            {{ end }}
+            {{ with $pub.Params.arxiv }}
+            <a href="{{ . }}" class="badge" target="_blank" rel="noopener">{{ $iconArxiv | safeHTML }} arXiv</a>
+            {{ end }}
+            {{ with $pub.Params.code }}
+            <a href="{{ . }}" class="badge" target="_blank" rel="noopener">{{ $iconCode | safeHTML }} Code</a>
+            {{ end }}
+            {{ with $pub.Params.slides }}
+            <a href="{{ . }}" class="badge" target="_blank" rel="noopener">{{ $iconSlide | safeHTML }} Slides</a>
+            {{ end }}
+            {{ with $pub.Params.video }}
+            <a href="{{ . }}" class="badge" target="_blank" rel="noopener">{{ $iconVideo | safeHTML }} Video</a>
+            {{ end }}
+          </div>
+        </div>
+
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+
+</div>
+{{ end }}
