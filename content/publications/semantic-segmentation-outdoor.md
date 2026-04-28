@@ -9,6 +9,7 @@ pub_color: "#1e40af"
 pdf: ""
 arxiv: "https://arxiv.org/abs/2402.00000"
 code: ""
+slides: ""
 abstract: >
   Legged robots operating outdoors must quickly classify terrain types to select appropriate
   locomotion gaits. We present a lightweight transformer-based segmentation network that runs

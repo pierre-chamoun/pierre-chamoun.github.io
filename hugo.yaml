@@ -1,0 +1,50 @@
+baseURL: 'https://pierre-chamoun.github.io/'
+locale: en-us
+title: Pierre Chamoun
+
+params:
+  name:        Pierre Chamoun
+  shortname:   PC
+  tagline:     MSc Robotics Student
+  institution: McGill University
+  email:       pierre.chamoun@outlook.com
+  github:      'youtube.com'
+  scholar:     'youtube.com'
+  linkedin:    'youtube.com'
+  twitter:     'lol'
+  cv:          'lol.pdf'
+  description: Academic portfolio of Pierre Chamoun, MSc Robotics student.
+  # avatar: /img/avatar.jpg   # add your photo to static/img/ and uncomment
+
+menus:
+  main:
+    - name: About
+      url: /
+      weight: 1
+    - name: Publications
+      url: /publications/
+      weight: 2
+    - name: News
+      url: /news/
+      weight: 3
+    - name: Blog
+      url: /blog/
+      weight: 4
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - ['\\[', '\\]']
+            - ['$$', '$$']
+          inline:
+            - ['\\(', '\\)']
+            - ['$', '$']
+  highlight:
+    style: dracula
+    lineNos: false

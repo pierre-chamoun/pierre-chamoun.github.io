@@ -1,0 +1,21 @@
+{{ define "main" }}
+<div class="container">
+  <div class="section-header">
+    <h1 class="section-title">{{ .Title | title }}</h1>
+    <p class="section-desc">{{ len .Pages }} article{{ if ne (len .Pages) 1 }}s{{ end }}</p>
+  </div>
+  <div class="post-list" style="padding-top:2rem;">
+    {{ range .Pages }}
+    <article class="post-card">
+      <div class="post-card-meta">
+        <time datetime="{{ .Date | time.Format "2006-01-02" }}">{{ .Date | time.Format "Jan 2, 2006" }}</time>
+        <span class="post-card-meta-sep">·</span>
+        <span>{{ .ReadingTime }} min read</span>
+      </div>
+      <h2 class="post-card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      {{ with .Summary }}<p class="post-card-summary">{{ . }}</p>{{ end }}
+    </article>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
