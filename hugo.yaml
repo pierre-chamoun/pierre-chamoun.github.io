@@ -8,9 +8,9 @@ params:
   tagline:     MSc Robotics Student
   institution: McGill University
   email:       pierre.chamoun@mail.mcgill.ca
-  github:      'youtube.com'
-  linkedin:    'youtube.com'
-  scholar:     'youtube.com'
+  github:      'https://github.com/pierre-chamoun'
+  linkedin:    'https://linkedin.com/in/pierre-chamoun'
+  scholar:     'https://scholar.google.com/citations?user=example'
   twitter:     ''
   cv:          'lol.pdf'
   description: Academic portfolio of Pierre Chamoun, MSc Robotics student.
