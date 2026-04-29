@@ -101,10 +101,10 @@ ul, ol { list-style: none; }
 
 .hero-name {
   font-family: var(--font-display);
-  font-size: 2.5rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
   margin-bottom: 0.3rem;
 }
 .hero-subtitle {
@@ -248,7 +248,7 @@ ul, ol { list-style: none; }
 .section-title {
   font-family: var(--font-display);
   font-size: 2rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.01em;
 }
 .section-desc {
@@ -317,7 +317,7 @@ ul, ol { list-style: none; }
 .pub-single-title {
   font-family: var(--font-display);
   font-size: 1.85rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.2;
   margin-bottom: 0.85rem;
@@ -495,7 +495,7 @@ ul, ol { list-style: none; }
 .post-title {
   font-family: var(--font-display);
   font-size: 2.25rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.15;
   margin-bottom: 0.75rem;
@@ -852,8 +852,7 @@ details[open] .toc-toggle::after { transform: rotate(-180deg); }
   .hero-inner { flex-direction: column; align-items: center; gap: 2.5rem; }
   .hero-avatar, .hero-avatar-placeholder { width: 128px; height: 128px; order: -1; }
   .hero-name, .hero-subtitle { text-align: center; }
-  .hero-links { justify-content: center; }
-  .hero-name { font-size: 1.9rem; }
+  .hero-name { font-size: 2rem; }
   .home-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .news-timeline-item { grid-template-columns: 54px 18px 1fr; gap: 0 0.65rem; }
   .post-title { font-size: 1.75rem; }
