@@ -18,6 +18,13 @@
     {{ end }}
   </header>
 
+  {{ with .TableOfContents }}
+  <details class="toc">
+    <summary class="toc-toggle">Contents</summary>
+    <div class="toc-body">{{ . }}</div>
+  </details>
+  {{ end }}
+
   <div class="post-content prose">
     {{ .Content }}
   </div>

@@ -46,6 +46,9 @@ markup:
           inline:
             - ['\\(', '\\)']
             - ['$', '$']
+  tableOfContents:
+    startLevel: 2
+    endLevel: 3
   highlight:
     style: dracula
     lineNos: false
