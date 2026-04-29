@@ -810,34 +810,61 @@ ul, ol { list-style: none; }
   .post-title { font-size: 1.75rem; }
   .pub-single-title { font-size: 1.5rem; }
 }
+/* Nav overlay + drawer — hidden on desktop */
+.nav-overlay { display: none; }
+.nav-drawer  { display: none; }
+
 @media (max-width: 640px) {
-  .site-header .container {
-    height: auto;
-    min-height: 54px;
-    padding: 0 1.25rem;
-    flex-wrap: wrap;
-    gap: 0;
-  }
-  .burger { display: flex; align-items: center; }
-  .site-nav-wrap {
+  .site-header .container { height: 64px; min-height: 64px; padding: 0 1.25rem; }
+  .burger      { display: flex; align-items: center; }
+  .site-nav-wrap { display: none; } /* desktop nav hidden on mobile */
+
+  /* Gray overlay — full screen, left strip stays visible */
+  .nav-overlay {
     display: none;
-    width: 100%;
-    border-top: 1px solid var(--border);
-    padding: 0.5rem 0 0.9rem;
-    margin: 0;
+    position: fixed;
+    inset: 0;
+    z-index: 199;
+    background: rgba(0, 0, 0, 0.45);
   }
-  .site-nav-wrap.open { display: block; }
-  .site-nav {
-    flex-direction: column;
-    gap: 0;
-  }
-  .site-nav a {
+  .nav-overlay.open { display: block; }
+
+  /* White drawer — right 78%, full viewport height */
+  .nav-drawer {
     display: block;
-    padding: 0.7rem 0;
-    font-size: 0.95rem;
-    border-bottom: 1px solid var(--border);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 78%;
+    background: var(--bg);
+    z-index: 200;
+    transform: translateX(100%);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 2rem 1.5rem 2rem;
+    overflow-y: auto;
   }
-  .site-nav li:last-child a { border-bottom: none; }
+  .nav-drawer.open { transform: translateX(0); }
+
+  /* Links inside drawer */
+  .nav-drawer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .nav-drawer-links a {
+    display: block;
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    transition: background 0.12s;
+  }
+  .nav-drawer-links a:hover { background: var(--surface); }
+  .nav-drawer-links a.active { background: var(--surface); color: var(--accent); font-weight: 600; }
 }
 @media (max-width: 480px) {
   .site-footer .container { flex-direction: column; gap: 0.4rem; }

@@ -7,6 +7,19 @@
   <header class="site-header">
     {{ partial "header.html" . }}
   </header>
+
+  {{/* Mobile nav drawer — direct child of body, no sticky/backdrop parent */}}
+  <div class="nav-overlay" id="nav-overlay"></div>
+  <nav class="nav-drawer" id="nav-drawer">
+    <ul class="nav-drawer-links">
+      {{ range site.Menus.main }}
+      <li>
+        <a href="{{ .URL }}"{{ if eq $.RelPermalink .URL }} class="active"{{ end }}>{{ .Name }}</a>
+      </li>
+      {{ end }}
+    </ul>
+  </nav>
+
   <main>
     {{ block "main" . }}{{ end }}
   </main>

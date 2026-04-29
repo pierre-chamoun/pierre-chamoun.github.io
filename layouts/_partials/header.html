@@ -1,6 +1,18 @@
 <div class="container">
   <a href="{{ site.Home.RelPermalink }}" class="site-title">{{ site.Params.name | default site.Title }}</a>
 
+  {{/* Desktop inline nav */}}
+  <nav class="site-nav-wrap">
+    <ul class="site-nav">
+      {{ range site.Menus.main }}
+      <li>
+        <a href="{{ .URL }}"{{ if eq $.RelPermalink .URL }} class="active"{{ end }}>{{ .Name }}</a>
+      </li>
+      {{ end }}
+    </ul>
+  </nav>
+
+  {{/* Burger — mobile only */}}
   <button class="burger" id="burger-btn" aria-label="Toggle navigation" aria-expanded="false">
     <svg class="burger-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
       <line x1="3" y1="6"  x2="21" y2="6"/>
@@ -12,39 +24,45 @@
       <line x1="6"  y1="6"  x2="18" y2="18"/>
     </svg>
   </button>
-
-  <nav class="site-nav-wrap" id="site-nav-wrap">
-    <ul class="site-nav">
-      {{ range site.Menus.main }}
-      <li>
-        <a href="{{ .URL }}"{{ if eq $.RelPermalink .URL }} class="active"{{ end }}>{{ .Name }}</a>
-      </li>
-      {{ end }}
-    </ul>
-  </nav>
 </div>
 
 <script>
-(function () {
-  var btn  = document.getElementById('burger-btn');
-  var wrap = document.getElementById('site-nav-wrap');
+document.addEventListener('DOMContentLoaded', function () {
+  var btn     = document.getElementById('burger-btn');
+  var drawer  = document.getElementById('nav-drawer');
+  var overlay = document.getElementById('nav-overlay');
+  if (!btn || !drawer || !overlay) return;
   var iconOpen  = btn.querySelector('.burger-open');
   var iconClose = btn.querySelector('.burger-close');
 
+  function open() {
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    iconOpen.style.display  = 'none';
+    iconClose.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    iconOpen.style.display  = 'block';
+    iconClose.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
   btn.addEventListener('click', function () {
-    var open = wrap.classList.toggle('open');
-    btn.setAttribute('aria-expanded', String(open));
-    iconOpen.style.display  = open ? 'none'  : 'block';
-    iconClose.style.display = open ? 'block' : 'none';
+    drawer.classList.contains('open') ? close() : open();
   });
 
-  wrap.querySelectorAll('a').forEach(function (a) {
-    a.addEventListener('click', function () {
-      wrap.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-      iconOpen.style.display  = 'block';
-      iconClose.style.display = 'none';
-    });
+  overlay.addEventListener('click', function (e) {
+    if (!drawer.contains(e.target)) close();
   });
-}());
+
+  drawer.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', close);
+  });
+});
 </script>
