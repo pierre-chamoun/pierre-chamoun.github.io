@@ -141,7 +141,6 @@ ul, ol { list-style: none; }
 .hero-links-dropdown {
   position: absolute;
   top: calc(100% + 0.5rem);
-  left: 0;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;

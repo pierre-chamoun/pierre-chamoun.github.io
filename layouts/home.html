@@ -81,6 +81,12 @@
           }
           moreBtn.addEventListener('click', function(e) {
             e.stopPropagation();
+            if (dropdown.hidden) {
+              var btnRect = moreBtn.getBoundingClientRect();
+              var wrapRect = linksEl.closest('.hero-links-wrap').getBoundingClientRect();
+              dropdown.style.right = (wrapRect.right - btnRect.right) + 'px';
+              dropdown.style.left = 'auto';
+            }
             dropdown.hidden = !dropdown.hidden;
           });
           document.addEventListener('click', function() { dropdown.hidden = true; });
