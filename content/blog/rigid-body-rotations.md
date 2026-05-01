@@ -4,7 +4,7 @@ date: 2025-11-20
 summary: "Rotation matrices, quaternions, and Lie groups each represent the same thing — orientation in 3D — but with very different trade-offs. This post builds each representation from scratch and explains why SO(3) as a Lie group is the right abstraction for robotics."
 tags: ["math", "robotics", "geometry"]
 math: true
-draft: false
+draft: true
 ---
 
 Representing orientation in 3D is deceptively tricky. Euler angles suffer from gimbal lock,

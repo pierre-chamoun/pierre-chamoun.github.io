@@ -4,7 +4,7 @@ date: 2026-01-08
 summary: "From Dijkstra on a grid to RRT* in continuous high-dimensional space — a ground-up tour of motion planning algorithms, with the maths behind asymptotic optimality."
 tags: ["robotics", "planning", "algorithms"]
 math: true
-draft: false
+draft: true
 ---
 
 Motion planning — finding a collision-free path from start to goal — is one of robotics'

@@ -4,7 +4,7 @@ date: 2025-12-10
 summary: "Occupancy grids let a robot maintain a probabilistic map of its environment cell by cell. The log-odds update rule makes each Bayesian update a simple addition — fast, numerically stable, and easy to implement."
 tags: ["robotics", "estimation", "perception"]
 math: true
-draft: false
+draft: true
 ---
 
 Occupancy grids are arguably the most practical mapping representation for mobile robots.
