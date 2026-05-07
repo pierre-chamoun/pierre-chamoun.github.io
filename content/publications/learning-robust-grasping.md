@@ -13,7 +13,7 @@ abstract: >
   demonstrations. Our approach combines imitation learning with domain randomization to achieve
   high success rates on novel objects without extensive real-world data collection. Experiments
   on a 7-DOF manipulator show a 23% improvement over prior methods on out-of-distribution objects.
-draft: false
+draft: true
 ---
 
 Further details, figures, and supplementary material will appear here once the paper is published.

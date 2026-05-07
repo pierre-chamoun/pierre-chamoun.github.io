@@ -15,5 +15,5 @@ abstract: >
   locomotion gaits. We present a lightweight transformer-based segmentation network that runs
   at 60 fps on edge hardware and achieves 89.2 mIoU on our new OutdoorSeg benchmark comprising
   12,000 images across forests, urban sidewalks, and construction sites.
-draft: false
+draft: true
 ---

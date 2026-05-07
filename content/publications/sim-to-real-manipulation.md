@@ -16,5 +16,5 @@ abstract: >
   policy robustness. On a suite of contact-rich tasks — peg insertion, gear assembly, and cable
   routing — our approach reduces the simulation-to-real performance gap by 41% relative to
   fixed-schedule baselines.
-draft: false
+draft: true
 ---

@@ -14,5 +14,5 @@ abstract: >
   as pedestrians and vehicles. By fusing dense depth from LiDAR with sparse feature tracks from
   a monocular camera through an iterated extended Kalman filter, our method achieves state-of-the-art
   translational error on the KITTI and nuScenes benchmarks while running in real time on an embedded GPU.
-draft: false
+draft: true
 ---

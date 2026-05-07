@@ -13,5 +13,5 @@ abstract: >
   on unlabelled contact trajectories. Early experiments on a GelSight sensor show that linear
   probes trained on our representations achieve competitive slip-detection accuracy with 10×
   fewer labelled examples than supervised baselines.
-draft: false
+draft: true
 ---
