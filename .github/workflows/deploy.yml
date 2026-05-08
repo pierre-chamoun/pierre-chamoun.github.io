@@ -20,6 +20,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install LaTeX
+        run: sudo apt-get install -y texlive-latex-extra texlive-fonts-extra biber
+
+      - name: Compile CV
+        run: |
+          pdflatex -interaction=nonstopmode cv.tex
+          biber cv
+          pdflatex -interaction=nonstopmode cv.tex
+          cp cv.pdf static/cv.pdf
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
