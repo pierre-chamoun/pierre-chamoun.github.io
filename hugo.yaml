@@ -1,7 +1,6 @@
 baseURL: 'https://pierre-chamoun.github.io/'
 locale: en-us
 title: Pierre Chamoun
-enableRobotsTXT: true
 
 params:
   name:        Pierre Chamoun

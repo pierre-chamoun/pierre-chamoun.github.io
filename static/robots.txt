@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pierre-chamoun.github.io/sitemap.xml
