@@ -11,7 +11,7 @@ params:
   linkedin:    'https://linkedin.com/in/pierre-chamoun'
   scholar:     'https://scholar.google.com/citations?user=example'
   twitter:     ''
-  cv:          'lol.pdf'
+  cv:          'cv.pdf'
   description: Academic portfolio of Pierre Chamoun, MSc Robotics student.
   accentColor: '#00838a'
   avatar: /img/avatar.jpeg   # add your photo to static/img/ and uncomment
