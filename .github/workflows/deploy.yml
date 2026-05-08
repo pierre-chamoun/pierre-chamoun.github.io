@@ -23,11 +23,11 @@ jobs:
       - name: Compile CV
         uses: dante-ev/latex-action@latest
         with:
-          root_file: cv.tex
+          root_file: main.tex
           working_directory: cv
 
       - name: Move CV to static
-        run: cp cv/cv.pdf static/cv.pdf
+        run: cp cv/main.pdf static/cv.pdf
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
