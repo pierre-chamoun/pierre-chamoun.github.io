@@ -14,7 +14,7 @@ params:
   cv:          'cv.pdf'
   description: Academic portfolio of Pierre Chamoun, MSc Robotics student.
   accentColor: '#00838a'
-  avatar: /img/avatar.jpeg   # add your photo to static/img/ and uncomment
+  avatar: /img/avatar.jpeg   # add your photo to static/img/
 
 menus:
   main:
