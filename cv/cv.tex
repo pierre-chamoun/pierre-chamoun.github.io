@@ -26,7 +26,7 @@
 %----------------------------------------------------------------------------------------
 
 % article class because we want to fully customize the page and not use a cv template
-\documentclass[a4paper,12pt]{article}
+\documentclass[letter,10pt]{article}
 
 %----------------------------------------------------------------------------------------
 %	FONT
@@ -108,17 +108,18 @@
     {
     }
 
-\newenvironment{joblong}[2]
+\newenvironment{joblong}[3]
     {
     \begin{tabularx}{\linewidth}{@{}l X r@{}}
-    \textbf{#1} & \hfill &  #2 \\[3.75pt]
+    \textbf{#1} & & \textbf{#3} \\[2pt]
+    \textit{#2} & & \\[3.75pt]
     \end{tabularx}
     \begin{minipage}[t]{\linewidth}
     \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt,label=--]
     }
     {
     \end{itemize}
-    \end{minipage}    
+    \end{minipage}
     }
 
 
@@ -146,51 +147,81 @@
 \href{https://github.com/pierre-chamoun}{\raisebox{-0.05\height}\faGithub\ pierre-chamoun} \ $|$ \ 
 \href{https://linkedin.com/in/pierre-chamoun}{\raisebox{-0.05\height}\faLinkedin\ pierre-chamoun} \ $|$ \ 
 \href{https://pierre-chamoun.github.io}{\raisebox{-0.05\height}\faGlobe \ pierre-chamoun.github.io} \ $|$ \ 
-\href{mailto:pierre.chamoun@mail.mcgill.ca}{\raisebox{-0.05\height}\faEnvelope \ pierre.chamoun@mail.mcgill.ca} \ $|$ \ 
-\href{tel:+1-555-555-5555}{\raisebox{-0.05\height}\faMobile \ +1-555-555-5555} \\
+\href{mailto:pierre.chamoun@mail.mcgill.ca}{\raisebox{-0.05\height}\faEnvelope \ pierre.chamoun@mail.mcgill.ca} \ % $|$ \ 
+% \href{tel:(+1-555-555-5555)}{\raisebox{-0.05\height}\faMobile \ +1-555-555-5555} \\
 \end{tabularx}
 
 %----------------------------------------------------------------------------------------
-% EXPERIENCE SECTIONS
+%	SUMMARY
 %----------------------------------------------------------------------------------------
-
-%Interests/ Keywords/ Summary
 \section{Summary}
-This CV can also be automatically compiled and published using GitHub Actions. For details, \href{https://github.com/jitinnair1/autoCV}{click here}.
-
-%Experience
-\section{Work Experience}
-
-\begin{jobshort}{Designation}{Jan 2021 - present}
-long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width
-\end{jobshort}
-
-
-\begin{joblong}{Designation}{Mar 2019 - Jan 2021}
-\item long long line of blah blah that will wrap when the table fills the column width
-\item again, long long line of blah blah that will wrap when the table fills the column width but this time even more long long line of blah blah. again, long long line of blah blah that will wrap when the table fills the column width but this time even more long long line of blah blah
-\end{joblong}
-  
-%Projects
-\section{Projects}
-
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\textbf{Some Project} & \hfill \href{https://some-link.com}{Link to Demo} \\[3.75pt]
-\multicolumn{2}{@{}X@{}}{long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width}  \\
-\end{tabularx}
+I am a master's student in robotics at McGill University working in the DECAR research group led by Professor James Forbes. My research focuses on robot perception and state estimation. I am broadly interested in building systems that reason reliably under uncertainty in unstructured environments.
 
 %----------------------------------------------------------------------------------------
 %	EDUCATION
 %----------------------------------------------------------------------------------------
 \section{Education}
-\begin{tabularx}{\linewidth}{@{}l X@{}}	
-2030 - present & PhD (Subject) at \textbf{University} \hfill \normalsize (GPA: 4.0/4.0) \\
+\begin{tabularx}{\linewidth}{@{}l X r@{}}
+\textbf{McGill University} & & \textbf{Expected Sep. 2027} \\[2pt]
+\multicolumn{3}{@{}l@{}}{\textit{Master of Science (M.Sc.), Robotics}} \\[2pt]
+\multicolumn{3}{@{}p{\linewidth}@{}}{\small GPA: 4.0/4.0 $|$ FRQNT Master's Scholarship $|$ MEUSMA} \\[8pt]
 
-2023 - 2027 & Bachelor's Degree at \textbf{College} \hfill (GPA: 4.0/4.0) \\ 
+\textbf{McGill University} & & \textbf{Dec. 2025} \\[2pt]
+\multicolumn{3}{@{}l@{}}{\textit{Bachelor of Engineering (B.Eng.), Mechanical Engineering}} \\[2pt]
+\multicolumn{3}{@{}p{\linewidth}@{}}{\small GPA: 3.97/4.00 $|$ J.W. McConnell Scholarship $|$ NSERC Research Award $|$ Dean's Honour List $|$ McGill Robotics} \\
+\end{tabularx}
 
-2022 & Class 12th Some Board \hfill  (Grades) \\
+%----------------------------------------------------------------------------------------
+%	SKILLS
+%----------------------------------------------------------------------------------------
+\section{Technical Skills}
+\begin{tabularx}{\linewidth}{@{}l X@{}}
+Programming          & \normalsize{C++, Python, MATLAB} \\
+Robotics \& Tools    & \normalsize{ROS, Docker} \\
+Technical Areas      & \normalsize{State Estimation, Control Theory, Computer Vision, Machine Learning} \\
+Other                & \normalsize{Scientific computing, statistical methods, GD\&T} \\
+\end{tabularx}
 
-2021 & Class 10th Some Board \hfill  (Grades) \\
+%----------------------------------------------------------------------------------------
+%	EXPERIENCE
+%----------------------------------------------------------------------------------------
+\section{Work Experience}
+
+\begin{joblong}{Pratt \& Whitney Canada}{Engineering Design Intern}{Jan 2025 -- Present}
+\item Introduced engineering changes to reduce non-conformities resulting from the manufacturing process or to accommodate supplier requests.
+\item Validated and prepared documentation for various engineering change requests.
+\item Familiarized with the operation, manufacturing, and assembly of Pratt \& Whitney Canada's main gas turbine engines.
+\end{joblong}
+
+\begin{joblong}{McGill Aerodynamics Laboratory}{Research Intern in Fluid Dynamics}{May 2024 -- Aug 2024}
+\item Applied machine learning techniques to study a hydrodynamic field resulting from a simulation of a turbulent oscillatory internal flow.
+\item Used Python to perform principal component analysis (PCA) to reduce the dimensionality of the information space needed to describe the hydrodynamic field.
+\item Calibrated a nonlinear model to predict the temporal dynamics of the fluid velocity field by estimating the evolution of its principal components.
+\end{joblong}
+
+\begin{joblong}{McGill Aerodynamics Laboratory}{Research Intern in Fluid Dynamics}{May 2023 -- Aug 2023}
+\item Conducted direct numerical simulations using Channelflow to study turbulent internal flows subjected to an oscillatory pressure gradient.
+\item Used the Unix interface to operate the Graham computing cluster of the Canadian Digital Research Alliance.
+\item Performed data analysis with Python using statistical and spectral methods.
+\end{joblong}
+
+%----------------------------------------------------------------------------------------
+%	PROJECTS
+%----------------------------------------------------------------------------------------
+\section{Projects}
+
+\begin{tabularx}{\linewidth}{ @{}l r@{} }
+\textbf{Auxiliary Transmission Box for a Small Aircraft} & \\[3.75pt]
+\multicolumn{2}{@{}X@{}}{Modeled an auxiliary transmission box including gears, shafts, and bearings in SOLIDWORKS. Optimized free parameters using Python to minimize mass and size while adhering to fatigue stress safety criteria.} \\[6pt]
+
+\textbf{Prototype for an Automatic Pill Counter} & \\[3.75pt]
+\multicolumn{2}{@{}X@{}}{Designed components in SOLIDWORKS, 3D printed the prototype, and created an Arduino-controlled circuit. Won first place in the class design competition.} \\[6pt]
+
+\textbf{Wall-Mounted Key Holder} & \\[3.75pt]
+\multicolumn{2}{@{}X@{}}{Designed components in SOLIDWORKS, 3D printed plastic parts, and determined toolpaths with Mastercam for milling and turning of metal components.} \\[6pt]
+
+\textbf{Thruster Positioning for an Autonomous Underwater Vehicle} & \\[3.75pt]
+\multicolumn{2}{@{}X@{}}{Developed a Python code to analyze thruster positioning configurations for an autonomous underwater robot. Verified 6-DOF feasibility and identified the optimal configuration minimizing average current draw.} \\
 \end{tabularx}
 
 %----------------------------------------------------------------------------------------
@@ -201,15 +232,6 @@ long long line of blah blah that will wrap when the table fills the column width
 \nocite{*}
 \printbibliography[heading=none]
 \end{refsection}
-
-%----------------------------------------------------------------------------------------
-%	SKILLS
-%----------------------------------------------------------------------------------------
-\section{Skills}
-\begin{tabularx}{\linewidth}{@{}l X@{}}
-Some Skills &  \normalsize{This, That, Some of this and that etc.}\\
-Some More Skills  &  \normalsize{Also some more of this, Some more that, And some of this and that etc.}\\  
-\end{tabularx}
 
 \vfill
 \center{\footnotesize Last updated: \today}
