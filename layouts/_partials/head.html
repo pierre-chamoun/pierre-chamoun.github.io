@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>
   {{- if .IsHome -}}
-    {{ site.Title }}{{ with site.Params.tagline }} — {{ . }}{{ end }}
+    {{ site.Title }}{{ with site.Params.tagline }} - {{ . }}{{ end }}
   {{- else -}}
     {{ printf "%s | %s" .Title site.Title }}
   {{- end -}}

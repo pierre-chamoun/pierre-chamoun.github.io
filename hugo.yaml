@@ -1,4 +1,5 @@
 baseURL: 'https://pierre-chamoun.github.io/'
+uglyURLs: false
 locale: en-us
 title: Pierre Chamoun
 
