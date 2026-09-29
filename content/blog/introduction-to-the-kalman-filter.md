@@ -4,7 +4,7 @@ date: 2025-10-15
 summary: "The Kalman filter is the workhorse of state estimation in robotics. I walk through the predict and update steps from first principles and show why it is the optimal linear estimator under Gaussian noise."
 tags: ["estimation", "robotics", "math"]
 math: true
-draft: false
+draft: true
 ---
 
 The Kalman filter is the cornerstone of state estimation in robotics. It gives us an optimal
